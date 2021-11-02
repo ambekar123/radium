@@ -1,0 +1,90 @@
+Hi everyone,Good Afternoon:functionup
+bootcamp is being conducted by functionup
+coding means functionup
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+PS C:\Users\Dell> cd assignment
+cd : Cannot find path 'C:\Users\Dell\assignment' because it does not exist.
+At line:1 char:1
++ cd assignment
++ ~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\Dell\assignment:String) [Set-Location], Item  
+   NotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+ 
+    Directory: C:\Users\Dell
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02-11-2021     14:32                assignment
+
+
+PS C:\Users\Dell> cd
+PS C:\Users\Dell> cd assignment
+
+
+    Directory: C:\Users\Dell\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02-11-2021     14:33                source
+
+
+
+    Directory: C:\Users\Dell\assignment
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02-11-2021     14:34                destination
+
+
+PS C:\Users\Dell\assignment\source> touch abc.txt
+touch : The term 'touch' is not recognized as the name of a cmdlet, function, script file, or         
+operable program. Check the spelling of the name, or if a path was included, verify that the path is  
+correct and try again.
+At line:1 char:1
++ touch abc.txt
++ ~~~~~
+    + CategoryInfo          : ObjectNotFound: (touch:String) [], CommandNotFoundException
+    + CategoryInfo          : ObjectNotFound: (C:\Users\Dell\assignment\source\abc:String) [Get-Cont  
+   ent], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+PS C:\Users\Dell\assignment\source> cp abc.txt ../destination
+PS C:\Users\Dell\assignment\source> cd ..
+PS C:\Users\Dell\assignment> cd destination
+PS C:\Users\Dell\assignment\destination> rm abc.txt
+mv : Cannot find path 'C:\Users\Dell\assignment\source\source' because it does not exist.
+At line:1 char:1
++ mv source ../destination
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\Dell\assignment\source\source:String) [Move-  
+   Item], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.MoveItemCommand
+ 
+PS C:\Users\Dell\assignment\source> cd ..
+PS C:\Users\Dell\assignment> mv source ../destination
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----       02-11-2021     14:59                source
+
+
+PS C:\Users\Dell\assignment\source> mv abc.txt ../destination
+PS C:\Users\Dell\assignment\source> cd ..
+PS C:\Users\Dell\assignment> cd destination
+PS C:\Users\Dell\assignment\destination> ls
+
+
+    Directory: C:\Users\Dell\assignment\destination
+
+
+----                -------------         ------ ----
+-a----       02-11-2021     15:01             27 abc.txt
