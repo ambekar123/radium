@@ -9,7 +9,9 @@ const createBook = async function (req, res) {
 
 const getBooksData= async function (req, res) {
 
-        // let allBooks= await BookModel.find()
+    let allBooks= await BookModel.find().select({bookName:1,authorName:1})
+
+
         // let allBooks= await BookModel.find().count()
         // let allBooks= await BookModel.find( { sales: 0 } )
         // let allBooks= await BookModel.find( { sales: 0 } ).count()
@@ -55,15 +57,15 @@ const getBooksData= async function (req, res) {
         // let allBooks= await BookModel.find( {  bookName: /Node$/i   } ) //ends with Node
         // let allBooks= await BookModel.find( {  bookName: /^Intro/i   } ) //starts with Node
 
-        let a=5
-        let b=6
-        let c=  a+b
-        console.log(c)
+       // let a=5
+       // let b=6
+       // let c=  a+b
+        //console.log(c)
 
 
 
         
-        let allBooks= await BookModel.find( { "prices.europeanPrice" : "4Pounds"} ) // without await, this line will start to get executed..but the server will move to next line without COMPLETING the execution..this might cause code to break in the next few lines
+        //let allBooks= await BookModel.find( { "prices.europeanPrice" : "4Pounds"} ) // without await, this line will start to get executed..but the server will move to next line without COMPLETING the execution..this might cause code to break in the next few lines
         // hence we use await to ask the program to wait for the completion of this line..till this line completes, execution wont move to next line
 
         // await is typically used at 2 places:
@@ -75,6 +77,33 @@ const getBooksData= async function (req, res) {
 
         res.send({msg: allBooks})        
     }
+ 
+    const getBooksInYear= async function (req, res) {
+        let getBooksInYear= await BookModel.find({year: req.body.year})
+        res.send({msg: getBooksInYear})
+    }
+
+    const getParticularBooks= async function (req, res) {
+        let getParticularBooks= await BookModel.find(req.body)
+        res.send({msg: getParticularBooks})
+    }
+
+    const getRandomBooks= async function (req, res) {
+        let getRandomBooks= await BookModel.find({$or:[{stockAvailable:true},{totalPages:{$gt:500}}]})
+        res.send({msg: getRandomBooks})
+    }
+
+    const getXINRBooks= async function (req, res) {
+        let getXINRBooks= await BookModel.find({"prices.IndianPrice":{$in:["100INR","200INR","500INR"]}})
+        res.send({msg: getXINRBooks})
+    }
+    
+
 
 module.exports.createBook= createBook
 module.exports.getBooksData= getBooksData
+
+module.exports.getBooksInYear=getBooksInYear
+module.exports.getParticularBooks=getParticularBooks
+module.exports.getRandomBooks=getRandomBooks;
+module.exports.getXINRBooks=getXINRBooks;
