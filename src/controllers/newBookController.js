@@ -1,13 +1,36 @@
 const newBookModel= require("../models/newBookModel")
 const newAuthorModel = require("../models/newAuthorModel")
 const newAuthorController = require("./newAuthorController")
+const publisherModel = require("../models/publisherModel")
 const mongoose= require("mongoose")
 
 const createNewBook = async function (req, res) {
     const book= req.body
-    let savedBook= await BookModel.create(book)
-    res.send({msg: savedBook})
+    let authorId = req.body.author
+    let publisherId = req.body.publisher
+    let requestPublisherById = await publisherModel.findById(publisherId)
+    let requestAuthorById = await newAuthorModel.findById(authorId)
+    if(requestAuthorById && requestPublisherById){
+        let bookCreated = await newBookModel.create(book)
+        res.send({msg:bookCreated})
+    }else{
+        res.send("Enter a valid author id or publisher id")
+    }
+    let savedBook= await newBookModel.create(book)
+    res.send({book: savedBook})
 }
+  
+const createPublisher = async function (req, res) {
+    let publisher= req.body
+    let savedPublisher= await publisherModel.create(publisher)
+    res.send({msg: savedPublisher})
+}
+
+const getBooks = async function (req,res){
+    let allBooks = await newBookModel.find().populate('author').populate('publisher')
+    res.send({msg:allBooks})
+}
+
 //List out the books written by Chetan Bhagat:
 const findAuthor = async function (req, res) {
     let allBooks = await newAuthorModel.find({author_name:"Chetan Bhagat"})
@@ -57,3 +80,5 @@ module.exports.createNewBook= createNewBook
 module.exports.findAuthor= findAuthor
 module.exports.priceChange= priceChange
 module.exports.findBooks= findBooks
+module.exports.getBooks = getBooks
+module.exports.createPublisher = createPublisher
