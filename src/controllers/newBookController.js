@@ -25,7 +25,7 @@ const createPublisher = async function (req, res) {
     let savedPublisher= await publisherModel.create(publisher)
     res.send({msg: savedPublisher})
 }
-
+//Populate:
 const getBooks = async function (req,res){
     let allBooks = await newBookModel.find().populate('author').populate('publisher')
     res.send({msg:allBooks})
