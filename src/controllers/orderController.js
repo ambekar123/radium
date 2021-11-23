@@ -6,15 +6,15 @@ const createOrder = async function (req, res) {
     // user validation
     let userId = req.body.userId
     let productId = req.body.productId
-    //let appHeaderType = req.headers['isfreeapp']
+        let appHeaderType = req.headers['isfreeapp']
     let appTypeFree = req.isFreeAppUser//This attribute was set in the appMiddleware
     let orderAmount
     let orderDate = Date()
-    // if(appHeaderType === 'false') {
-    //     appTypeFree = false
-    // } else {
-    //     appTypeFree = true
-    // }
+         if(appHeaderType === 'false') {
+             appTypeFree = false
+         } else {
+             appTypeFree = true
+            }
 
     let user = await userModel.findById(userId)
     if(!user) {
