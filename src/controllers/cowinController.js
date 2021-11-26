@@ -133,7 +133,7 @@ const londonWeather = async function(req,res){
             let london1  = await axios(londonOptions)
             let london2 = london1.data.name
             console.log(london2)
-            let london = london1.data.main.temp
+            let london3 = london1.data.main.temp
             console.log(london3)
             res.status(200).send({msg:"Success",data:london3})
         }
