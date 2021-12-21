@@ -32,7 +32,7 @@ const createBook = async function (req, res) {
             res.status(400).send({ status: false, message: 'Invalid request parameters. Please provide blog details' })
             return
         }
-        let { title, excerpt, userId, ISBN, category, subcategory, reviews, isDeleted, releasedAt } = requestBody;
+        let { title, excerpt, userId, ISBN, category, subcategory, reviews, isDeleted, releasedAt,bookCover } = requestBody;
         if (!isValid(title)) {
             res.status(400).send({ status: false, message: 'Book Title is required' })
             return
@@ -101,6 +101,7 @@ const createBook = async function (req, res) {
             subcategory,
             reviews,
             releasedAt,
+            bookCover,
             isDeleted: isDeleted ? isDeleted : false,
             deletedAt: isDeleted ? new Date() : null
         }
@@ -498,7 +499,7 @@ const updateReview = async (req, res) => {
 
         let updatedReview = await reviewModel.findOneAndUpdate({ _id: req.params.reviewId, isDeleted: false },update, { new: true })
         
-        res.status(200).send({ status: false, msg: "review update is successfull...", updatedReview })
+        res.status(200).send({ status: true, msg: "review update is successfull...", updatedReview })
         return
        
     } catch (err) {

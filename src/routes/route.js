@@ -1,14 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
+const aws = require("aws-sdk");
+
 
 const userController = require('../controllers/userController')
 const bookController = require('../controllers/bookController')
 const mid1=require('../middleware/tokenAuth')
+const awsController = require('../controllers/awsController')
 
 
 //POST FOR USER
 router.post('/register', userController.createUser)
+
+router.post("/write-file-aws", awsController.createAws)
 
 //POST FOR LOGIN USER
 router.post('/login', userController.loginUser)
